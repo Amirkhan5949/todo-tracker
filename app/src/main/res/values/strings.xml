@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">todo-tracker </string>
     <string name="add_task">Add Task</string>
+    <string name="see_task">See All Task</string>
+    <string name="hello">Hello</string>
     <string name="all_tasks">All tasks</string>
     <string name="add_task_msg">Fill the details below to add a task into your TODO</string>
     <string name="task_title">Task title</string>
@@ -8,5 +10,6 @@
     <string name="task_date">Task date</string>
     <string name="add_an_event">Add an event</string>
     <string name="completed">COMPLETED</string>
+    <string name="task_time">Task time</string>
 
 </resources>

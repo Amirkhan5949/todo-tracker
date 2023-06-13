@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_24sdp"
             android:gravity="center"
-            android:text="Add a task"
+            android:text="@string/add_task"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_20ssp"
             tools:ignore="MissingPrefix" />
@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:text="Task time"
+                android:text="@string/task_time"
                 tools:ignore="MissingPrefix" />
 
             <EditText

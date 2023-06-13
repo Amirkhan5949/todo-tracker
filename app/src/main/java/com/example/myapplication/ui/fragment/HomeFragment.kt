@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.ui.bottomsheet.ShowCalendarViewBottomSheet
 
 class HomeFragment : Fragment() {
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,29 +27,33 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         navController = findNavController()
+        onBackPressed()
     }
+
     private fun setupOnClickListeners() {
-        binding.tvHello.setOnClickListener {
-            //navigate with action id
-            navController.navigate(R.id.action_homeFragment_to_item_Add_Fragment)
-        }
+        binding.tvHello.setOnClickListener { navController.navigate(R.id.action_homeFragment_to_item_Add_Fragment) }
 
         binding.tvAddTask.setOnClickListener {
-            //navigate with direction object
-            val actionHomeFragmentToViewTransactions = HomeFragmentDirections.actionHomeFragmentToItemAddFragment()
+            val actionHomeFragmentToViewTransactions =
+                HomeFragmentDirections.actionHomeFragmentToItemAddFragment()
             navController.navigate(actionHomeFragmentToViewTransactions)
         }
 
-       /*binding.calendar.setOnClickListener {
-           val navOption = NavOptions.Builder()
-               .setEnterAnim(R.anim.slide_in_right)
-               .setExitAnim(R.anim.slide_out_left)
-               .setPopEnterAnim(R.anim.slide_in_left)
-               .setPopExitAnim(R.anim.slide_out_right)
-               .build()
+        binding.calendar.setOnClickListener {
+            ShowCalendarViewBottomSheet().show(
+                childFragmentManager,
+                tag
+            )
+        }
 
-           navController.navigate(R.id.action_homeFragment_to_item_Add_Fragment,null,navOption)
-       }*/
     }
+
+    private fun onBackPressed() = requireActivity().onBackPressedDispatcher.addCallback(
+        viewLifecycleOwner,
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                requireActivity().finish()
+            }
+        })
 
 }
