@@ -11,5 +11,7 @@
     <string name="add_an_event">Add an event</string>
     <string name="completed">COMPLETED</string>
     <string name="task_time">Task time</string>
+    <string name="validation">please fill the all required field</string>
+    <string name="data_saved">Saved the Data in Database</string>
 
 </resources>

@@ -6,15 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.TaskViewModel
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.ui.adapter.TaskListAdapter
 import com.example.myapplication.ui.bottomsheet.ShowCalendarViewBottomSheet
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var navController: NavController
+    private val taskViewModel: TaskViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +35,9 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         navController = findNavController()
+        val layoutManager = LinearLayoutManager(requireContext())
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.taskRecycler.layoutManager = layoutManager
         onBackPressed()
     }
 
@@ -44,6 +55,11 @@ class HomeFragment : Fragment() {
                 childFragmentManager,
                 tag
             )
+        }
+
+        taskViewModel.getAllTask().observe(this) {
+            val adapter = TaskListAdapter(it)
+            binding.taskRecycler.adapter = adapter
         }
 
     }
